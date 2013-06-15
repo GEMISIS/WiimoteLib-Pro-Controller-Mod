@@ -446,13 +446,10 @@ namespace WiimoteLib
 				case ExtensionType.Guitar:
 				case ExtensionType.BalanceBoard:
 				case ExtensionType.Drums:
-					mWiimoteState.ExtensionType = (ExtensionType)type;
+                case ExtensionType.WiiUPro:
+                    mWiimoteState.ExtensionType = (ExtensionType)type;
 					this.SetReportType(InputReport.ButtonsExtension, true);
 					break;
-                case ExtensionType.WiiUPro:
-					mWiimoteState.ExtensionType = (ExtensionType)type;
-					this.SetReportType(InputReport.ButtonsExtension, true);
-                    break;
 				default:
 					throw new WiimoteException("Unknown extension controller found: " + type.ToString("x"));
 			}
@@ -548,10 +545,7 @@ namespace WiimoteLib
 		/// <param name="buff">Data buffer</param>
 		private void ParseButtons(byte[] buff)
 		{
-            if (mWiimoteState.ExtensionType == ExtensionType.WiiUPro)
-            {
-            }
-            else
+            if (mWiimoteState.ExtensionType != ExtensionType.WiiUPro)
             {
                 mWiimoteState.ButtonState.A = (buff[2] & 0x08) != 0;
                 mWiimoteState.ButtonState.B = (buff[2] & 0x04) != 0;
