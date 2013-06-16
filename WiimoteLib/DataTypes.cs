@@ -223,6 +223,18 @@ namespace WiimoteLib
 		{
 			IRState.IRSensors = new IRSensor[4];
 		}
+
+        /// <summary>
+        /// Gets whether this is a Wii U Pro Controller or not.
+        /// </summary>
+        public bool IsWiiUPro
+        {
+            get
+            {
+                // Check that it is an extension and that the extension is the Wii U Pro Controller.
+                return (this.Extension) && (this.ExtensionType == WiimoteLib.ExtensionType.WiiUPro);
+            }
+        }
 	}
 
 	/// <summary>
@@ -827,7 +839,7 @@ namespace WiimoteLib
         /// <summary>
         /// The Wii U Pro Controller.
         /// </summary>
-        WiiUPro = 0xA4200120,
+        WiiUPro             = 0xA4200120,
         /// <summary>
 		/// Partially inserted extension.  This is an error condition.
 		/// </summary>
